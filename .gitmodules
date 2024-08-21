@@ -1,0 +1,3 @@
+[submodule "deps/LLVMBrewer"]
+	path = deps/LLVMBrewer
+	url = https://github.com/Scriptor25/LLVMBrewer.git
