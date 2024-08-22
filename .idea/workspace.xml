@@ -28,7 +28,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="454e9cee-709b-4d61-ad33-6ee9f56e38ff" name="Changes" comment="" />
+    <list default="true" id="454e9cee-709b-4d61-ad33-6ee9f56e38ff" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deps/LLVMBrewer" beforeDir="false" afterPath="$PROJECT_DIR$/deps/LLVMBrewer" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/Q/Parser.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/Q/Parser.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/def_function_statement.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/def_function_statement.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -1205,7 +1211,7 @@
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Q" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="examples/test.q -o a.out" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" WORKING_DIR="file://$ContentRoot$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Q" TARGET_NAME="Q" CONFIG_NAME="VS" RUN_TARGET_PROJECT_NAME="Q" RUN_TARGET_NAME="Q">
+    <configuration name="Q" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="examples/test.q" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" WORKING_DIR="file://$ContentRoot$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Q" TARGET_NAME="Q" CONFIG_NAME="VS" RUN_TARGET_PROJECT_NAME="Q" RUN_TARGET_NAME="Q">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -1254,7 +1260,7 @@
       <updated>1724244036025</updated>
       <workItem from="1724244039205" duration="871000" />
       <workItem from="1724244925594" duration="3153000" />
-      <workItem from="1724321972777" duration="18839000" />
+      <workItem from="1724321972777" duration="20621000" />
     </task>
     <servers />
   </component>

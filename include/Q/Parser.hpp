@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Brewer/Brewer.hpp>
+#include <Brewer/AST.hpp>
 
 namespace Q
 {

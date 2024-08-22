@@ -1,6 +1,6 @@
+#include <filesystem>
 #include <fstream>
 #include <iostream>
-#include <Brewer/AST.hpp>
 #include <Brewer/Pipeline.hpp>
 #include <Q/Operator.hpp>
 #include <Q/Parser.hpp>
@@ -8,7 +8,11 @@
 int main(const int argc, const char** argv)
 {
     std::string input_filename;
-    std::string output_filename = "a.out";
+    std::string module_id;
+    std::string output_filename;
+
+    bool dump_ast = false;
+    bool dump_ir = false;
 
     for (int i = 1; i < argc; ++i)
     {
@@ -18,11 +22,27 @@ int main(const int argc, const char** argv)
             output_filename = argv[++i];
             continue;
         }
+        if (arg == "-m")
+        {
+            module_id = argv[++i];
+            continue;
+        }
+        if (arg == "-da")
+        {
+            dump_ast = true;
+            continue;
+        }
+        if (arg == "-di")
+        {
+            dump_ir = true;
+            continue;
+        }
         if (input_filename.empty())
         {
             input_filename = arg;
             continue;
         }
+        std::cerr << "unused argument '" << arg << "'" << std::endl;
         break;
     }
 
@@ -39,7 +59,10 @@ int main(const int argc, const char** argv)
         return 1;
     }
 
-    Brewer::Pipeline(stream, input_filename)
+    if (output_filename.empty()) output_filename = "a.out";
+    if (module_id.empty()) module_id = std::filesystem::path(input_filename).replace_extension().filename().string();
+
+    Brewer::Pipeline()
         .ParseStmtFn("{", Q::ParseCompound)
         .ParseStmtFn("def", Q::ParseDef)
         .ParseStmtFn("do", Q::ParseDoWhile)
@@ -49,7 +72,9 @@ int main(const int argc, const char** argv)
         .ParseStmtFn("while", Q::ParseWhile)
         .GenUnaryFn("&", Q::GenRef)
         .GenUnaryFn("*", Q::GenDeref)
-        .DumpIR()
-        .BuildAndEmit(output_filename);
+        .DumpAST(dump_ast)
+        .DumpIR(dump_ir)
+        .ModuleID(module_id)
+        .BuildAndEmit(stream, input_filename, output_filename);
     return 0;
 }

@@ -5,6 +5,8 @@
 #include <llvm/IR/Verifier.h>
 #include <Q/AST.hpp>
 
+#include "Brewer/Util.hpp"
+
 Q::Param::Param(Brewer::TypePtr type, std::string name)
     : Type(std::move(type)), Name(std::move(name))
 {
@@ -80,7 +82,20 @@ void Q::DefFunctionStatement::GenIRNoVal(Brewer::Builder& builder) const
     builder.GetContext().CurrentResult() = Result;
     for (size_t i = 0; i < Params.size(); ++i)
         builder[Params[i].Name] = Brewer::RValue::Direct(builder, Params[i].Type, fn->getArg(i));
-    Body->GenIRNoVal(builder);
+
+    if (const auto p = dynamic_cast<Brewer::Expression*>(Body.get()))
+    {
+        auto result = p->GenIR(builder);
+        if (!Result->IsVoid())
+        {
+            result = builder.GenCast(result, Result);
+            builder.IRBuilder().CreateRet(result->Get());
+        }
+    }
+    else
+    {
+        Body->GenIRNoVal(builder);
+    }
     builder.Pop();
 
     if (Result->IsVoid())
