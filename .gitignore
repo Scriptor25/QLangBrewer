@@ -1,2 +1,6 @@
+# cmake build directory
 /build/
+
+# example output files
+/a.exe
 /a.out
