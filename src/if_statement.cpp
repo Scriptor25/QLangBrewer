@@ -1,7 +1,25 @@
 #include <Brewer/Builder.hpp>
+#include <Brewer/Parser.hpp>
 #include <Brewer/Value.hpp>
 #include <llvm/IR/BasicBlock.h>
 #include <Q/AST.hpp>
+#include <Q/Parser.hpp>
+
+Brewer::StmtPtr Q::ParseIf(Brewer::Parser& parser)
+{
+    auto loc = parser.Expect("if").Location;
+
+    auto if_ = parser.ParseExpr();
+    auto then = parser.Parse();
+
+    if (parser.NextIfAt("else"))
+    {
+        auto else_ = parser.Parse();
+        return std::make_unique<IfStatement>(loc, std::move(if_), std::move(then), std::move(else_));
+    }
+
+    return std::make_unique<IfStatement>(loc, std::move(if_), std::move(then), nullptr);
+}
 
 Q::IfStatement::IfStatement(const Brewer::SourceLocation& loc,
                             Brewer::ExprPtr if_,

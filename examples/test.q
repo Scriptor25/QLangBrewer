@@ -1,27 +1,33 @@
-def i32 fib(i32 n) {
-    def i32 a = 0
-    def i32 b = 1
-    def i32 i = 0
-    while ++i < n {
-        def i32 x = a + b
-        a = b
-        b = x
-    }
-    return b
+use person as struct {
+    i8* name,
+    i8 age
+}
+
+def person* init_person(person* p, i8* name, i8 age) {
+    p!name = name
+    p!age = age
+    return p
 }
 
 def i32 printf(i8*, ?)
-def i32 puts(i8*)
-def i32 atoi(i8*)
+
+def void print_person(person* p)
+    = printf("{ name=%s, age=%d }", p!name, p!age)
 
 def i32 main(i32 argc, i8** argv) {
-    if argc != 2 {
-        puts("USAGE: fib <n>")
-        return 1
-    }
 
-    def i32 n = atoi(argv[1])
-    def i32 res = fib(n)
-    printf("fib(%d) = %d\n", n, res)
+    def person felix
+    init_person(&felix, "Felix", 18)
+
+    def person max
+    init_person(&max, "Max", 20)
+
+    printf("felix = ")
+    print_person(&felix)
+    printf("\n")
+    printf("max = ")
+    print_person(&max)
+    printf("\n")
+
     return 0
 }

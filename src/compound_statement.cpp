@@ -1,5 +1,24 @@
 #include <Brewer/Builder.hpp>
+#include <Brewer/Context.hpp>
+#include <Brewer/Parser.hpp>
 #include <Q/AST.hpp>
+#include <Q/Parser.hpp>
+
+Brewer::StmtPtr Q::ParseCompound(Brewer::Parser& parser)
+{
+    auto loc = parser.Expect("{").Location;
+
+    std::vector<Brewer::StmtPtr> body;
+    parser.GetContext().Push();
+    while (!parser.NextIfAt("}"))
+    {
+        auto ptr = parser.Parse();
+        body.push_back(std::move(ptr));
+    }
+    parser.GetContext().Pop();
+
+    return std::make_unique<Q::CompoundStatement>(loc, body);
+}
 
 Q::CompoundStatement::CompoundStatement(const Brewer::SourceLocation& loc, std::vector<Brewer::StmtPtr>& body)
     : Statement(loc)

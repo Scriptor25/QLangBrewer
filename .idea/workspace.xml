@@ -29,18 +29,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="454e9cee-709b-4d61-ad33-6ee9f56e38ff" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/include/Q/AST.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/compound_statement.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/def_function_statement.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/def_variable_statement.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/do_while_statement.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/if_statement.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/return_statement.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/while_statement.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/fib.q" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/Q/Operator.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/include/Q/Parser.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/def_statement.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/operator.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_as_statement.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/deps/LLVMBrewer" beforeDir="false" afterPath="$PROJECT_DIR$/deps/LLVMBrewer" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/test.q" beforeDir="false" afterPath="$PROJECT_DIR$/examples/test.q" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compound_statement.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/compound_statement.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/def_function_statement.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/def_function_statement.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/do_while_statement.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/do_while_statement.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/if_statement.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/if_statement.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/return_statement.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/return_statement.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/while_statement.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/while_statement.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1122,7 +1126,26 @@
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.40.33807/include/memory" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.40.33807/include/vector" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.40.33807/include/xmemory" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.40.33807/include/xstring" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -1148,7 +1171,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "CMake Application.Q.executor": "Run",
+    "CMake Application.Q.executor": "Debug",
     "NIXITCH_NIXPKGS_CONFIG": "",
     "NIXITCH_NIX_CONF_DIR": "",
     "NIXITCH_NIX_OTHER_STORES": "",
@@ -1238,7 +1261,7 @@
       <updated>1724244036025</updated>
       <workItem from="1724244039205" duration="871000" />
       <workItem from="1724244925594" duration="3153000" />
-      <workItem from="1724321972777" duration="12520000" />
+      <workItem from="1724321972777" duration="18439000" />
     </task>
     <servers />
   </component>

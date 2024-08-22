@@ -1,6 +1,16 @@
 #include <Brewer/Builder.hpp>
+#include <Brewer/Parser.hpp>
 #include <Brewer/Value.hpp>
 #include <Q/AST.hpp>
+#include <Q/Parser.hpp>
+
+Brewer::StmtPtr Q::ParseWhile(Brewer::Parser& parser)
+{
+    auto loc = parser.Expect("while").Location;
+    auto condition = parser.ParseExpr();
+    auto loop = parser.Parse();
+    return std::make_unique<WhileStatement>(loc, std::move(condition), std::move(loop));
+}
 
 Q::WhileStatement::WhileStatement(const Brewer::SourceLocation& loc, Brewer::ExprPtr condition, Brewer::StmtPtr loop)
     : Statement(loc), Condition(std::move(condition)), Loop(std::move(loop))

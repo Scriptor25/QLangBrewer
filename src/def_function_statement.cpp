@@ -83,6 +83,14 @@ void Q::DefFunctionStatement::GenIRNoVal(Brewer::Builder& builder) const
     Body->GenIRNoVal(builder);
     builder.Pop();
 
+    if (Result->IsVoid())
+        for (auto& block : *fn)
+            if (!block.getTerminator())
+            {
+                builder.IRBuilder().SetInsertPoint(&block);
+                builder.IRBuilder().CreateRetVoid();
+            }
+
     if (verifyFunction(*fn, &llvm::errs()))
     {
         llvm::errs() << '\n';
