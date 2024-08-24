@@ -24,9 +24,10 @@ def +name() {
 
 def void name:print() = printf("%s %s", self.name, self.surname)
 
+def name john
+
 def i32 main(i32 argc, i8** argv) {
 
-    def name john
     john.print()
     printf("\n")
 

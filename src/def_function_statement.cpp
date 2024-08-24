@@ -81,7 +81,7 @@ void Q::DefFunctionStatement::GenIRNoVal(Brewer::Builder& builder) const
         Name);
 
     llvm::Function* fn;
-    if (!ref)
+    if (!ref || !ref->Get())
     {
         const auto fn_ty = type->GenIR(builder);
         fn = llvm::Function::Create(fn_ty, llvm::GlobalValue::ExternalLinkage, Name, builder.IRModule());
@@ -110,7 +110,7 @@ void Q::DefFunctionStatement::GenIRNoVal(Brewer::Builder& builder) const
     builder.IRBuilder().SetInsertPoint(bb);
 
     builder.Push();
-    builder.GetContext().CurrentResult() = Result;
+    builder.CurrentResult() = Result;
 
     if (Self)
         builder.GetSymbol("self") = Brewer::LValue::Direct(builder, Self, fn->getArg(0));
@@ -141,6 +141,21 @@ void Q::DefFunctionStatement::GenIRNoVal(Brewer::Builder& builder) const
                 builder.IRBuilder().SetInsertPoint(&block);
                 builder.IRBuilder().CreateRetVoid();
             }
+
+    if (!Self && Name == "main")
+    {
+        builder.IRBuilder().SetInsertPoint(&fn->front().front());
+        builder.IRBuilder().CreateCall(llvm::FunctionType::get(builder.IRBuilder().getVoidTy(), false),
+                                       builder.GetGlobalCtor());
+
+        for (auto& block : *fn)
+            if (block.getTerminator()->willReturn())
+            {
+                builder.IRBuilder().SetInsertPoint(block.getTerminator());
+                builder.IRBuilder().CreateCall(llvm::FunctionType::get(builder.IRBuilder().getVoidTy(), false),
+                                               builder.GetGlobalDtor());
+            }
+    }
 
     if (verifyFunction(*fn, &llvm::errs()))
     {

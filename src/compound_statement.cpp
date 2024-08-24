@@ -9,15 +9,15 @@ Brewer::StmtPtr Q::ParseCompound(Brewer::Parser& parser)
     auto loc = parser.Expect("{").Location;
 
     std::vector<Brewer::StmtPtr> body;
-    parser.GetContext().Push();
+    parser.GetBuilder().Push();
     while (!parser.NextIfAt("}"))
     {
         auto ptr = parser.Parse();
         body.push_back(std::move(ptr));
     }
-    parser.GetContext().Pop();
+    parser.GetBuilder().Pop();
 
-    return std::make_unique<Q::CompoundStatement>(loc, body);
+    return std::make_unique<CompoundStatement>(loc, body);
 }
 
 Q::CompoundStatement::CompoundStatement(const Brewer::SourceLocation& loc, std::vector<Brewer::StmtPtr>& body)

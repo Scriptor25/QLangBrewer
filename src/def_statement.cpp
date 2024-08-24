@@ -1,6 +1,8 @@
+#include <Brewer/Builder.hpp>
 #include <Brewer/Context.hpp>
 #include <Brewer/Parser.hpp>
 #include <Brewer/Type.hpp>
+#include <Brewer/Value.hpp>
 #include <Q/AST.hpp>
 #include <Q/Parser.hpp>
 
@@ -62,24 +64,26 @@ Brewer::StmtPtr Q::ParseDef(Brewer::Parser& parser)
             if (!parser.At(")")) parser.Expect(",");
         }
 
-        parser.GetContext().GetFunction(mode == Brewer::FuncMode_Member ? self : nullptr, name) =
-            Brewer::Type::GetFunPtr(mode, self, type, param_types, vararg);
+        if (auto& ref = parser.GetBuilder().GetFunction(mode == Brewer::FuncMode_Member ? self : nullptr, name); !ref)
+            ref = Brewer::Value::Empty(Brewer::Type::GetFunPtr(mode, self, type, param_types, vararg));
 
         Brewer::StmtPtr body;
         if (parser.At("{") || parser.NextIfAt("="))
         {
-            parser.GetContext().Push();
+            parser.GetBuilder().Push();
             for (auto& param : params)
-                parser.GetContext().GetSymbol(param.Name) = param.Type;
+                parser.GetBuilder().GetSymbol(param.Name) = Brewer::Value::Empty(param.Type);
             if (mode != Brewer::FuncMode_Normal)
-                parser.GetContext().GetSymbol("self") = self;
+                parser.GetBuilder().GetSymbol("self") = Brewer::Value::Empty(self);
             body = parser.Parse();
-            parser.GetContext().Pop();
+            parser.GetBuilder().Pop();
         }
+
         return std::make_unique<DefFunctionStatement>(loc, mode, self, type, name, params, vararg, std::move(body));
     }
 
-    parser.GetContext().GetSymbol(name) = type;
+    if (auto& ref = parser.GetBuilder().GetSymbol(name); !ref)
+        ref = Brewer::Value::Empty(type);
 
     if (parser.NextIfAt("="))
     {

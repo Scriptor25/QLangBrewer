@@ -38,7 +38,7 @@ void Q::ReturnStatement::GenIRNoVal(Brewer::Builder& builder) const
 
     auto result = Result->GenIR(builder);
     if (!result) return;
-    result = builder.GenCast(result, builder.GetContext().CurrentResult());
+    result = builder.GenCast(result, builder.CurrentResult());
 
     builder.IRBuilder().CreateRet(result->Get());
 }
