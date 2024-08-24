@@ -31,5 +31,5 @@ void Q::DefVariableStatement::GenIRNoVal(Brewer::Builder& builder) const
         value->Set(init->Get());
     }
 
-    builder[Name] = value;
+    builder.GetSymbol(Name) = value;
 }

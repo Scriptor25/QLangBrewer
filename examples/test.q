@@ -1,32 +1,28 @@
 use person as struct {
     i8* name,
-    i8 age
+    i8 age,
 }
 
-def person* init_person(person* p, i8* name, i8 age) {
-    p!name = name
-    p!age = age
-    return p
+def +person(i8* name, i8 age) {
+    self.name = name
+    self.age = age
 }
 
 def i32 printf(i8*, ?)
 
-def void print_person(person* p)
-    = printf("{ name=%s, age=%d }", p!name, p!age)
+def void person:print()
+    = printf("{ name = %s, age = %d }", self.name, self.age)
 
 def i32 main(i32 argc, i8** argv) {
 
-    def person felix
-    init_person(&felix, "Felix", 18)
-
-    def person max
-    init_person(&max, "Max", 20)
+    def person felix = person("Felix", 18)
+    def person max = person("Max", 20)
 
     printf("felix = ")
-    print_person(&felix)
+    felix.print()
     printf("\n")
     printf("max = ")
-    print_person(&max)
+    max.print()
     printf("\n")
 
     return 0

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Brewer/AST.hpp>
+#include <Brewer/Type.hpp>
 
 namespace Q
 {
@@ -25,6 +26,8 @@ namespace Q
     struct DefFunctionStatement : Brewer::Statement
     {
         DefFunctionStatement(const Brewer::SourceLocation&,
+                             Brewer::FuncMode mode,
+                             Brewer::TypePtr self,
                              Brewer::TypePtr result,
                              std::string name,
                              const std::vector<Param>& params,
@@ -34,6 +37,8 @@ namespace Q
         std::ostream& Dump(std::ostream&) const override;
         void GenIRNoVal(Brewer::Builder&) const override;
 
+        Brewer::FuncMode Mode;
+        Brewer::TypePtr Self;
         Brewer::TypePtr Result;
         std::string Name;
         std::vector<Param> Params;

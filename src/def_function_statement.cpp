@@ -13,12 +13,16 @@ Q::Param::Param(Brewer::TypePtr type, std::string name)
 }
 
 Q::DefFunctionStatement::DefFunctionStatement(const Brewer::SourceLocation& loc,
+                                              const Brewer::FuncMode mode,
+                                              Brewer::TypePtr self,
                                               Brewer::TypePtr result,
                                               std::string name,
                                               const std::vector<Param>& params,
                                               const bool vararg,
                                               Brewer::StmtPtr body)
     : Statement(loc),
+      Mode(mode),
+      Self(std::move(self)),
       Result(std::move(result)),
       Name(std::move(name)),
       Params(params),
@@ -29,7 +33,23 @@ Q::DefFunctionStatement::DefFunctionStatement(const Brewer::SourceLocation& loc,
 
 std::ostream& Q::DefFunctionStatement::Dump(std::ostream& stream) const
 {
-    stream << "def " << Result->GetName() << " " << Name << "(";
+    stream << "def ";
+    switch (Mode)
+    {
+    case Brewer::FuncMode_Normal:
+        stream << Result->GetName() << " ";
+        break;
+    case Brewer::FuncMode_Ctor:
+        stream << "+";
+        break;
+    case Brewer::FuncMode_Dtor:
+        stream << "-";
+        break;
+    case Brewer::FuncMode_Member:
+        stream << Result->GetName() << " " << Self->GetName() << ":";
+        break;
+    }
+    stream << Name << "(";
     for (size_t i = 0; i < Params.size(); ++i)
     {
         if (i > 0) stream << ", ";
@@ -43,6 +63,8 @@ std::ostream& Q::DefFunctionStatement::Dump(std::ostream& stream) const
     }
     stream << ") ";
     if (!Body) return stream;
+    if (!dynamic_cast<CompoundStatement*>(Body.get()))
+        stream << "= ";
     return stream << Body;
 }
 
@@ -50,19 +72,24 @@ void Q::DefFunctionStatement::GenIRNoVal(Brewer::Builder& builder) const
 {
     std::vector<Brewer::TypePtr> param_types;
     for (const auto& param : Params) param_types.push_back(param.Type);
-    const auto type = Brewer::FunctionType::Get(Result, param_types, VarArg);
+    const auto type = Brewer::FunctionType::Get(Mode, Self, Result, param_types, VarArg);
 
-    auto fn = builder.IRModule().getFunction(Name);
+    auto& ref = builder.GetFunction(Mode == Brewer::FuncMode_Member ? Self : nullptr, Name);
 
-    if (!fn)
+    llvm::Function* fn;
+    if (!ref)
     {
         const auto fn_ty = type->GenIR(builder);
         fn = llvm::Function::Create(fn_ty, llvm::GlobalValue::ExternalLinkage, Name, builder.IRModule());
-        for (size_t i = 0; i < Params.size(); ++i)
+        if (Self) fn->getArg(0)->setName("self");
+        for (size_t i = Self ? 1 : 0; i < Params.size(); ++i)
             fn->getArg(i)->setName(Params[i].Name);
+        ref = Brewer::RValue::Direct(builder, Brewer::PointerType::Get(type), fn);
     }
-
-    builder[Name] = Brewer::RValue::Direct(builder, Brewer::PointerType::Get(type), fn);
+    else
+    {
+        fn = llvm::cast<llvm::Function>(ref->Get());
+    }
 
     if (!Body) return;
 
@@ -80,8 +107,13 @@ void Q::DefFunctionStatement::GenIRNoVal(Brewer::Builder& builder) const
 
     builder.Push();
     builder.GetContext().CurrentResult() = Result;
+
+    if (Self)
+        builder.GetSymbol("self") = Brewer::LValue::Direct(builder, Self, fn->getArg(0));
     for (size_t i = 0; i < Params.size(); ++i)
-        builder[Params[i].Name] = Brewer::RValue::Direct(builder, Params[i].Type, fn->getArg(i));
+        builder.GetSymbol(Params[i].Name) = Brewer::RValue::Direct(builder,
+                                                                   Params[i].Type,
+                                                                   fn->getArg(i + (Self ? 1 : 0)));
 
     if (const auto p = dynamic_cast<Brewer::Expression*>(Body.get()))
     {
