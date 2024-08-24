@@ -30,11 +30,8 @@
   <component name="ChangeListManager">
     <list default="true" id="454e9cee-709b-4d61-ad33-6ee9f56e38ff" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deps/LLVMBrewer" beforeDir="false" afterPath="$PROJECT_DIR$/deps/LLVMBrewer" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/examples/test.q" beforeDir="false" afterPath="$PROJECT_DIR$/examples/test.q" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/Q/AST.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/Q/AST.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/def_function_statement.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/def_function_statement.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/def_statement.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/def_statement.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/def_variable_statement.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/def_variable_statement.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,6 +47,8 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -440,7 +439,7 @@
       <workItem from="1724244039205" duration="871000" />
       <workItem from="1724244925594" duration="3153000" />
       <workItem from="1724321972777" duration="20656000" />
-      <workItem from="1724493118652" duration="8193000" />
+      <workItem from="1724493118652" duration="9435000" />
     </task>
     <servers />
   </component>

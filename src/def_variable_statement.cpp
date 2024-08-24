@@ -30,6 +30,22 @@ void Q::DefVariableStatement::GenIRNoVal(Brewer::Builder& builder) const
         if (!init) return;
         value->Set(init->Get());
     }
+    else
+    {
+        // look for default constructor
+        if (const auto& ctor = builder.GetCtor(Type))
+        {
+            const auto func_type = std::dynamic_pointer_cast<Brewer::FunctionType>(
+                std::dynamic_pointer_cast<Brewer::PointerType>(ctor->GetType())->GetBase());
+            const auto fn_ty = func_type->GenIR(builder);
+            const auto callee = ctor->Get();
+
+            const auto self = Brewer::LValue::Alloca(builder, Type, "instance");
+            builder.IRBuilder().CreateCall(fn_ty, callee, {self->GetPtr()});
+
+            value->Set(self->Get());
+        }
+    }
 
     builder.GetSymbol(Name) = value;
 }

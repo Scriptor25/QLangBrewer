@@ -74,7 +74,11 @@ void Q::DefFunctionStatement::GenIRNoVal(Brewer::Builder& builder) const
     for (const auto& param : Params) param_types.push_back(param.Type);
     const auto type = Brewer::FunctionType::Get(Mode, Self, Result, param_types, VarArg);
 
-    auto& ref = builder.GetFunction(Mode == Brewer::FuncMode_Member ? Self : nullptr, Name);
+    auto& ref = builder.GetFunction(
+        Mode == Brewer::FuncMode_Member || Mode == Brewer::FuncMode_Dtor
+            ? Self
+            : nullptr,
+        Name);
 
     llvm::Function* fn;
     if (!ref)
