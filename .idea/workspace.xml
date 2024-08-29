@@ -30,6 +30,7 @@
   <component name="ChangeListManager">
     <list default="true" id="454e9cee-709b-4d61-ad33-6ee9f56e38ff" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/test.q" beforeDir="false" afterPath="$PROJECT_DIR$/examples/test.q" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -409,11 +410,6 @@
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.Q">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Q" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="examples/test.q -di" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" WORKING_DIR="file://$ContentRoot$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Q" TARGET_NAME="Q" CONFIG_NAME="VS" RUN_TARGET_PROJECT_NAME="Q" RUN_TARGET_NAME="Q">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -446,11 +442,11 @@
     </configuration>
     <list>
       <item itemvalue="CMake Application.Q" />
-      <item itemvalue="CMake Application.brewer" />
+      <item itemvalue="CMake Application.RISCVTargetParserTableGen" />
       <item itemvalue="CMake Application.acc_gen" />
+      <item itemvalue="CMake Application.brewer" />
       <item itemvalue="CMake Application.intrinsics_gen" />
       <item itemvalue="CMake Application.omp_gen" />
-      <item itemvalue="CMake Application.RISCVTargetParserTableGen" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -465,7 +461,10 @@
       <workItem from="1724244925594" duration="3153000" />
       <workItem from="1724321972777" duration="20656000" />
       <workItem from="1724493118652" duration="12281000" />
-      <workItem from="1724510344610" duration="3275000" />
+      <workItem from="1724510344610" duration="3306000" />
+      <workItem from="1724582628157" duration="461000" />
+      <workItem from="1724583162766" duration="2160000" />
+      <workItem from="1724946688346" duration="1000" />
     </task>
     <servers />
   </component>
